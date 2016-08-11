@@ -1208,6 +1208,10 @@ class Finance4ReceiptHelper():
         #if orderInfoDO.deliveryNo is not None and orderInfoDO.deliveryNo.strip()!="":
         if orderInfoDO.tradeStatus == "DDJS":
             return self.COD_CASH_ALL_REJECT_PROCESS
+
+        if orderInfoDO.returnAmount is not None and orderInfoDO.returnAmount >0 and orderInfoDO.returnAmount == orderInfoDO.orderAmount:
+            return self.COD_CASH_ALL_REJECT_PROCESS
+
         if orderInfoDO.returnAmount is not None and orderInfoDO.returnAmount >0 and orderInfoDO.returnAmount != orderInfoDO.orderAmount:
             if orderInfoDO.tradeStatus == "CWQRSK" or self.isDDTHOrder(receiptInitParam):
                 return self.COD_CASH_PART_REJECT_PAID_CONFIRM_PROCESS
